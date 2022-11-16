@@ -6,22 +6,38 @@
 //
 
 import SwiftUI
+import PhotosUI
 
 struct addModal: View {
+    @State private var newSticker: StickerPack = StickerPack()
+    @State private var selectedItem: PhotosPickerItem? = nil
+    @State private var imageData : Data? = nil
     @Binding var pickerMod : Bool
     @Binding var stickerList : [StickerPack]
-    @State var newSticker: StickerPack = StickerPack()
+    
     var body: some View {
         NavigationStack(){
             Form{
                 Section("Info"){
                     TextField("Insert title here",text: $newSticker.title)
-                    
-                    
                     TextField("Insert author here",text: $newSticker.author)
-                    TextField("Image",text:$newSticker.trayIcon)
-                }
-                    Section("Privacy"){
+                    }
+                    Section("Pack icon"){
+                        PhotosPicker(selection: $selectedItem, matching: .images)
+                        {
+                            Label("Select image", systemImage: "photo")
+                        }.onChange(of: selectedItem, perform: { newItem in
+                            Task{
+                                if let data = try? await newItem?.loadTransferable(type: Data.self){
+                                    imageData = data
+                                }
+                                if let imageData,let uiImage = UIImage(data: imageData){
+                                    Image(uiImage: uiImage)
+                                }
+                            }
+                        })
+                    }
+                Section("Privacy"){
                     Toggle(isOn: $newSticker.shared) {
                         Text("Share on community")
                     }
@@ -39,8 +55,8 @@ struct addModal: View {
                 .autocorrectionDisabled(true)
                 .textInputAutocapitalization(.never)
         }
-
-
+        
+        
     }
 }
 

@@ -8,7 +8,7 @@
 import Foundation
 
 struct StickerPack : Identifiable,Codable,Equatable {
-    init(title:String,author:String,shared:Bool,trayIcon:String,stickersImage:[String]) {
+    init(title:String,author:String,shared:Bool,trayIcon:String,stickersImage:[StickersImage]) {
         self.id = UUID()
         self.title = title
         self.author = author
@@ -22,12 +22,25 @@ struct StickerPack : Identifiable,Codable,Equatable {
         self.author = ""
         self.shared = false
         self.trayIcon = ""
-        self.stickersImage = []
+        self.stickersImage = AnyIterator {}.prefix(30).map{StickersImage()}
     }
     var id = UUID()
     var title : String
     var author: String
     var shared : Bool
     var trayIcon : String
-    var stickersImage: [String]
+    var stickersImage: [StickersImage]
+}
+
+struct StickersImage : Identifiable,Codable,Equatable{
+    init(imagePath:String){
+        self.id = UUID()
+        self.imagePath = imagePath
+    }
+    init(){
+        self.id = UUID()
+        self.imagePath = ""
+    }
+    var id = UUID()
+    var imagePath : String
 }
