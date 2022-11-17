@@ -21,7 +21,6 @@
 		EAB2877929229AF4006941E0 /* MyStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2877829229AF4006941E0 /* MyStickers.swift */; };
 		EAB2877C29229B1F006941E0 /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2877B29229B1F006941E0 /* Community.swift */; };
 		EAD3104C2923C7D200B70845 /* addModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD3104B2923C7D200B70845 /* addModal.swift */; };
-		EAEA7FF429236F8900DD1CAE /* stickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA7FF329236F8900DD1CAE /* stickerModel.swift */; };
 		EAEA7FF629236FD800DD1CAE /* dataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA7FF529236FD800DD1CAE /* dataStructure.swift */; };
 /* End PBXBuildFile section */
 
@@ -42,7 +41,6 @@
 		EAB2877829229AF4006941E0 /* MyStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStickers.swift; sourceTree = "<group>"; };
 		EAB2877B29229B1F006941E0 /* Community.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
 		EAD3104B2923C7D200B70845 /* addModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addModal.swift; sourceTree = "<group>"; };
-		EAEA7FF329236F8900DD1CAE /* stickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stickerModel.swift; sourceTree = "<group>"; };
 		EAEA7FF529236FD800DD1CAE /* dataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataStructure.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -74,7 +72,6 @@
 			children = (
 				EA309EEF2926953900C24720 /* CoreData */,
 				EAEA7FF72923713B00DD1CAE /* Structure */,
-				EAEA7FF82923714D00DD1CAE /* Model */,
 				EAB2877A29229AFE006941E0 /* View */,
 				EAB28769292299F0006941E0 /* StickerMakerStudio */,
 				EAB28768292299F0006941E0 /* Products */,
@@ -127,14 +124,6 @@
 				EA2CE4E62925632A00EAFD10 /* DataController.swift */,
 			);
 			path = Structure;
-			sourceTree = "<group>";
-		};
-		EAEA7FF82923714D00DD1CAE /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				EAEA7FF329236F8900DD1CAE /* stickerModel.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -217,7 +206,6 @@
 				EA0EFD2D292672530013714E /* StickerBundle+CoreDataProperties.swift in Sources */,
 				EA2CE4E72925632A00EAFD10 /* DataController.swift in Sources */,
 				EA532AF62924C01900932908 /* stickerView.swift in Sources */,
-				EAEA7FF429236F8900DD1CAE /* stickerModel.swift in Sources */,
 				EAB2877C29229B1F006941E0 /* Community.swift in Sources */,
 				EAEA7FF629236FD800DD1CAE /* dataStructure.swift in Sources */,
 				EA0EFD2B292672530013714E /* StickerImage+CoreDataProperties.swift in Sources */,

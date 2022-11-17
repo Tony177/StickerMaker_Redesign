@@ -19,7 +19,7 @@ extension StickerImage {
     @NSManaged public var id: UUID?
     @NSManaged public var image: Data?
     @NSManaged public var imagetobundle: StickerBundle?
-
+    
 }
 
 extension StickerImage : Identifiable {

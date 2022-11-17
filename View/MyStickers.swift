@@ -34,7 +34,7 @@ struct MyStickers: View {
                         }
                     }
                 }.onDelete(perform: stickerRemove)
-            }.searchable(text: $searchText,placement: .navigationBarDrawer(displayMode: .always),prompt: "Search your stickers")
+            }.searchable(text: $searchText,placement: .navigationBarDrawer(displayMode: .always),prompt: "Search your stickers").autocorrectionDisabled(true).textInputAutocapitalization(.never)
                 .toolbar {
                     Button {
                         pickerMod = true
@@ -50,7 +50,7 @@ struct MyStickers: View {
     }
     var searchResults: [StickerBundle] {//[StickerPack] {
         if searchText.isEmpty {
-            return bundle.sorted(by: {$0.title! > $1.title!})
+            return bundle.sorted(by: {$0.title! < $1.title!})
         } else {
             return bundle.filter { $0.title!.localizedCaseInsensitiveContains(searchText)}
         }
@@ -63,8 +63,8 @@ struct MyStickers: View {
         var t : Image
         if let icon = CD.trayIcon {
             t = Image(uiImage: UIImage(data: icon)!)
-        }else {
-            t = Image(systemName: "square.and.arrow.up")
+        } else {
+            t = Image(systemName: "x.circle")
         }
         return StickerPack(title: CD.title!, author: CD.author!, shared: CD.shared, trayIcon: t, stickersImage: CD.bundletoimage!)
     }

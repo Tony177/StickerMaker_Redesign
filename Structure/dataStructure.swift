@@ -23,7 +23,7 @@ struct StickerPack : Identifiable,Equatable {
         self.author = ""
         self.shared = false
         self.trayIcon = Image(systemName: "square.and.arrow.up")
-        self.stickersImage = NSSet(array: AnyIterator {}.prefix(30).map{StickerElem()})
+        self.stickersImage = NSSet(array: AnyIterator {}.prefix(30).map{StickerElem(img:Image(systemName: "square.and.arrow.up"))})
     }
     var id = UUID()
     var title : String
@@ -37,10 +37,6 @@ struct StickerElem : Identifiable,Equatable{
     init(img:Image){
         self.id = UUID()
         self.img = img
-    }
-    init(){
-        self.id = UUID()
-        self.img = Image(systemName: "square.and.arrow.up")
     }
     var id = UUID()
     var img : Image
