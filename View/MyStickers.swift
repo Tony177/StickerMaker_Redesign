@@ -8,19 +8,21 @@
 import SwiftUI
 
 struct MyStickers: View {
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.id)]) var bundle: FetchedResults<StickerBundle>
+    @Environment(\.managedObjectContext) var managedObjectContext
     @State var searchText : String = ""
     @State var pickerMod : Bool = false
-    @State var stickerList : [StickerPack] = stickerJSON
     
     var body: some View {
         NavigationStack{
             List{
-                ForEach(searchResults){stick in
+                ForEach(searchResults){CDstick in
+                    let stick = CDtoObj(CD: CDstick)
                     NavigationLink {
                         stickerView(stPack: .constant(stick))
                     } label: {
                         HStack{
-                            Image(stick.trayIcon).resizable().frame(width: 64,height: 64).clipShape(RoundedRectangle(cornerRadius: 8))
+                            stick.trayIcon.resizable().frame(width: 64,height: 64).clipShape(RoundedRectangle(cornerRadius: 8))
                             Spacer()
                             VStack(spacing:8){
                                 Text(stick.title).fontWeight(.semibold)
@@ -43,27 +45,27 @@ struct MyStickers: View {
             
         }
         .sheet(isPresented: $pickerMod) {
-            addModal(pickerMod: $pickerMod,stickerList: $stickerList)
+            addModal(pickerMod: $pickerMod)
         }
     }
-    var searchResults: [StickerPack] {
+    var searchResults: [StickerBundle] {//[StickerPack] {
         if searchText.isEmpty {
-            return stickerList
+            return bundle.sorted(by: {$0.title! > $1.title!})
         } else {
-            return stickerList.filter { $0.title.localizedCaseInsensitiveContains(searchText)}
+            return bundle.filter { $0.title!.localizedCaseInsensitiveContains(searchText)}
         }
     }
     func stickerRemove(at offset:IndexSet){
-        let t : UUID = searchResults[offset.first!].id
-        stickerList.removeAll(where: {$0.id == t})
-        savePack("stickers",stickerList)
+        managedObjectContext.delete(bundle.first(where: {$0.id == searchResults[offset.first!].id})!)
+        try? managedObjectContext.save()
     }
-}
-
-
-
-struct MyStickers_Previews: PreviewProvider {
-    static var previews: some View {
-        MyStickers()
+    func CDtoObj (CD : StickerBundle) -> StickerPack{
+        var t : Image
+        if let icon = CD.trayIcon {
+            t = Image(uiImage: UIImage(data: icon)!)
+        }else {
+            t = Image(systemName: "square.and.arrow.up")
+        }
+        return StickerPack(title: CD.title!, author: CD.author!, shared: CD.shared, trayIcon: t, stickersImage: CD.bundletoimage!)
     }
 }

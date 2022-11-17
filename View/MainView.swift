@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct MainView: View {
-    
+    @StateObject var dataController = DataController()
     var body: some View {
         NavigationStack{
             TabView{
@@ -21,7 +21,7 @@ struct MainView: View {
                         Label("Community",systemImage: "globe.americas.fill")
                     }
             }
-        }
+        }.environment(\.managedObjectContext,dataController.container.viewContext)
     }
 }
 

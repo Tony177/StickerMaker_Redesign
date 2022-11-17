@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21512" systemVersion="22A400" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="StickerBundle" representedClassName="StickerBundle" syncable="YES">
+        <attribute name="author" optional="YES" attributeType="String"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="shared" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="title" optional="YES" attributeType="String"/>
+        <attribute name="trayIcon" optional="YES" attributeType="Binary"/>
+        <relationship name="bundletoimage" toMany="YES" deletionRule="Cascade" destinationEntity="StickerImage" inverseName="imagetobundle" inverseEntity="StickerImage"/>
+    </entity>
+    <entity name="StickerImage" representedClassName="StickerImage" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="image" optional="YES" attributeType="Binary"/>
+        <relationship name="imagetobundle" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="StickerBundle" inverseName="bundletoimage" inverseEntity="StickerBundle"/>
+    </entity>
+</model>

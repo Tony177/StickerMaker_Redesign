@@ -9,14 +9,15 @@ import SwiftUI
 import PhotosUI
 
 struct addModal: View {
-    @State private var newSticker: StickerPack = StickerPack()
-    @State private var selectedItem: PhotosPickerItem? = nil
-    @State private var imageData : Data? = nil
+    @FetchRequest(sortDescriptors: [SortDescriptor(\.id)]) var bundle: FetchedResults<StickerBundle>
+    @Environment(\.managedObjectContext) var managedObjectContext
+    @State var newSticker: StickerPack = StickerPack()
+    @State var selectedItem: PhotosPickerItem? = nil
     @Binding var pickerMod : Bool
-    @Binding var stickerList : [StickerPack]
+    
     
     var body: some View {
-        NavigationStack(){
+        NavigationStack{
             Form{
                 Section("Info"){
                     TextField("Insert title here",text: $newSticker.title)
@@ -26,16 +27,7 @@ struct addModal: View {
                         PhotosPicker(selection: $selectedItem, matching: .images)
                         {
                             Label("Select image", systemImage: "photo")
-                        }.onChange(of: selectedItem, perform: { newItem in
-                            Task{
-                                if let data = try? await newItem?.loadTransferable(type: Data.self){
-                                    imageData = data
-                                }
-                                if let imageData,let uiImage = UIImage(data: imageData){
-                                    Image(uiImage: uiImage)
-                                }
-                            }
-                        })
+                        }
                     }
                 Section("Privacy"){
                     Toggle(isOn: $newSticker.shared) {
@@ -44,8 +36,20 @@ struct addModal: View {
                 }
                 Section{
                     Button {
-                        stickerList.append(newSticker)
-                        savePack("stickers",stickerList)
+                        let stick = StickerBundle(context: managedObjectContext)
+                        let stickImgs = [StickerImage](repeating:StickerImage(context: managedObjectContext),count:30)
+                        
+                        stick.id = UUID()
+                        stick.author = newSticker.author
+                        stick.title = newSticker.title
+                        Task{
+                            if let data = try await selectedItem?.loadTransferable(type: Data.self){
+                                stick.trayIcon = data
+                            }
+                        }
+                        stick.shared = newSticker.shared
+                        stick.bundletoimage = NSSet(array: stickImgs)
+                        try? managedObjectContext.save()
                         pickerMod = false
                     } label: {
                         Text("Add element")
@@ -60,8 +64,8 @@ struct addModal: View {
     }
 }
 
-struct addModal_Previews: PreviewProvider {
-    static var previews: some View {
-        addModal(pickerMod: .constant(true),stickerList: .constant([StickerPack()]))
-    }
-}
+//struct addModal_Previews: PreviewProvider {
+//    static var previews: some View {
+//        addModal(pickerMod: .constant(true),stickerList: .constant([StickerPack()]))
+//    }
+//}

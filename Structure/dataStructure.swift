@@ -6,9 +6,10 @@
 //
 
 import Foundation
+import SwiftUI
 
-struct StickerPack : Identifiable,Codable,Equatable {
-    init(title:String,author:String,shared:Bool,trayIcon:String,stickersImage:[StickersImage]) {
+struct StickerPack : Identifiable,Equatable {
+    init(title:String,author:String,shared:Bool,trayIcon:Image,stickersImage:NSSet) {
         self.id = UUID()
         self.title = title
         self.author = author
@@ -21,26 +22,26 @@ struct StickerPack : Identifiable,Codable,Equatable {
         self.title = ""
         self.author = ""
         self.shared = false
-        self.trayIcon = ""
-        self.stickersImage = AnyIterator {}.prefix(30).map{StickersImage()}
+        self.trayIcon = Image(systemName: "square.and.arrow.up")
+        self.stickersImage = NSSet(array: AnyIterator {}.prefix(30).map{StickerElem()})
     }
     var id = UUID()
     var title : String
     var author: String
     var shared : Bool
-    var trayIcon : String
-    var stickersImage: [StickersImage]
+    var trayIcon : Image
+    var stickersImage: NSSet
 }
 
-struct StickersImage : Identifiable,Codable,Equatable{
-    init(imagePath:String){
+struct StickerElem : Identifiable,Equatable{
+    init(img:Image){
         self.id = UUID()
-        self.imagePath = imagePath
+        self.img = img
     }
     init(){
         self.id = UUID()
-        self.imagePath = ""
+        self.img = Image(systemName: "square.and.arrow.up")
     }
     var id = UUID()
-    var imagePath : String
+    var img : Image
 }
