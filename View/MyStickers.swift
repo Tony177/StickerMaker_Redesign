@@ -17,7 +17,7 @@ struct MyStickers: View {
             List{
                 ForEach(searchResults){stick in
                     NavigationLink {
-                        stickerView(stPack: $stickerList.first(where: {$0.id == stick.id})!)
+                        stickerView(stickerList: $stickerList,stPack: $stickerList.first(where: {$0.id == stick.id})!)
                     } label: {
                         HStack{
                             base64toImage(stick.trayIcon).resizable().frame(width: 64,height: 64).clipShape(RoundedRectangle(cornerRadius: 8))
