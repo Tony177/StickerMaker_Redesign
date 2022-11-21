@@ -21,22 +21,19 @@ struct addModal: View {
                 Section("Info"){
                     TextField("Insert title here",text: $newSticker.title)
                     TextField("Insert author here",text: $newSticker.author)
-                    }
-                    Section("Pack icon"){
-                        PhotosPicker(selection: $selectedItem, matching: .images)
-                        {
-                            Label("Select image", systemImage: "photo")
-                        }.onChange(of: selectedItem, perform: { newItem in
-                            Task{
-                                if let data = try? await newItem?.loadTransferable(type: Data.self){
-                                    imageData = data
-                                }
-                                if let imageData,let uiImage = UIImage(data: imageData){
-                                    Image(uiImage: uiImage)
-                                }
+                }
+                Section("Pack icon"){
+                    PhotosPicker(selection: $selectedItem, matching: .images)
+                    {
+                        Label("Select image", systemImage: "photo")
+                    }.onChange(of: selectedItem, perform: { newItem in
+                        Task{
+                            if let data = try? await newItem?.loadTransferable(type: Data.self){
+                                newSticker.trayIcon = data.base64EncodedString()
                             }
-                        })
-                    }
+                        }
+                    })
+                }
                 Section("Privacy"){
                     Toggle(isOn: $newSticker.shared) {
                         Text("Share on community")

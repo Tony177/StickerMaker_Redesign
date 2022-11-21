@@ -17,10 +17,10 @@ struct MyStickers: View {
             List{
                 ForEach(searchResults){stick in
                     NavigationLink {
-                        stickerView(stPack: .constant(stick))
+                        stickerView(stPack: $stickerList.first(where: {$0.id == stick.id})!)
                     } label: {
                         HStack{
-                            Image(stick.trayIcon).resizable().frame(width: 64,height: 64).clipShape(RoundedRectangle(cornerRadius: 8))
+                            base64toImage(stick.trayIcon).resizable().frame(width: 64,height: 64).clipShape(RoundedRectangle(cornerRadius: 8))
                             Spacer()
                             VStack(spacing:8){
                                 Text(stick.title).fontWeight(.semibold)
@@ -33,6 +33,7 @@ struct MyStickers: View {
                     }
                 }.onDelete(perform: stickerRemove)
             }.searchable(text: $searchText,placement: .navigationBarDrawer(displayMode: .always),prompt: "Search your stickers")
+                .autocorrectionDisabled(true)
                 .toolbar {
                     Button {
                         pickerMod = true

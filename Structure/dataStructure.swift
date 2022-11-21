@@ -6,10 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
+func base64toImage(_ b64:String) -> Image {
+    return Image(uiImage: UIImage(data: Data(base64Encoded: b64)!)!)
+}
 struct StickerPack : Identifiable,Codable,Equatable {
-    init(title:String,author:String,shared:Bool,trayIcon:String,stickersImage:[StickersImage]) {
-        self.id = UUID()
+    init(id:UUID,title:String,author:String,shared:Bool,trayIcon:String,stickersImage:[StickersImage]) {
+        self.id = id
         self.title = title
         self.author = author
         self.shared = shared
@@ -21,7 +25,7 @@ struct StickerPack : Identifiable,Codable,Equatable {
         self.title = ""
         self.author = ""
         self.shared = false
-        self.trayIcon = ""
+        self.trayIcon = UIImage(systemName: "x.circle")!.withTintColor(.label).pngData()!.base64EncodedString()
         self.stickersImage = AnyIterator {}.prefix(30).map{StickersImage()}
     }
     var id = UUID()
@@ -33,14 +37,18 @@ struct StickerPack : Identifiable,Codable,Equatable {
 }
 
 struct StickersImage : Identifiable,Codable,Equatable{
-    init(imagePath:String){
-        self.id = UUID()
-        self.imagePath = imagePath
+    init(id:UUID,uiImage: UIImage,used : Bool){
+        self.id = id
+        self.image64 = uiImage.withTintColor(.label).pngData()!.base64EncodedString()
+        self.used = used
     }
     init(){
         self.id = UUID()
-        self.imagePath = ""
+        self.image64 = ""
+        self.used = false
     }
     var id = UUID()
-    var imagePath : String
+    var image64 : String
+    var used : Bool
 }
+
