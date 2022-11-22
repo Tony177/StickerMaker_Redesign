@@ -34,23 +34,27 @@ struct Community: View {
             ScrollView{
                 VStack(spacing:50){
                     ForEach(packs) { pack in
-                        VStack{
-                            HStack(spacing:40){
-                                base64toImage(pack.trayIcon).resizable().frame(width: 50,height: 50).clipShape(RoundedRectangle(cornerRadius: 5))
-                                VStack{
-                                    Text(pack.title).font(.headline)
-                                    Text(pack.author).font(.subheadline)
+                        ZStack{
+                            VStack{
+                                HStack(spacing:100){
+                                    base64toImage(pack.trayIcon).resizable().frame(width: 50,height: 50).clipShape(RoundedRectangle(cornerRadius: 5))
+                                    
+                                    VStack{
+                                        Text(pack.title).font(.headline)
+                                        Text(pack.author).font(.subheadline)
+                                    }
+                                    Spacer()
                                 }
-                                Spacer()
-                            }
-                            ScrollView(.horizontal){
-                                HStack{
-                                    ForEach(pack.stickersImage) { stick in
-                                        base64toImage(stick.image64).resizable().frame(width: 50,height: 50).clipShape(RoundedRectangle(cornerRadius: 5))
+                                ScrollView(.horizontal){
+                                    HStack{
+                                        ForEach(pack.stickersImage) { stick in
+                                            base64toImage(stick.image64).resizable().frame(width: 50,height: 50).clipShape(RoundedRectangle(cornerRadius: 5))
+                                        }
                                     }
                                 }
                             }
                         }
+                        
                     }
                 }
             }.padding()
