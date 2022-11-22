@@ -12,8 +12,9 @@ struct stickerView: View {
     let layout = [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),]
     @Environment(\.colorScheme) var colorScheme
     @State var onConfermation : Bool = false
+    @State var alertFull : Bool = false
     @State var selectedItem : [PhotosPickerItem?] = [PhotosPickerItem?](repeating: nil, count: 30)
-    @State var idxRemove : Int = 0
+    @State var idxSticker : Int = 0
     @Binding var stickerList : [StickerPack]
     @Binding var stPack : StickerPack
     
@@ -31,7 +32,7 @@ struct stickerView: View {
                             RoundedRectangle(cornerRadius: 8).stroke(lineWidth: 1).frame(width: 101,height: 101).opacity(colorScheme == .dark ? 0.8 : 0.1)
                             if (stPack.stickersImage[idx].used){
                                 Button {
-                                    idxRemove = idx
+                                    idxSticker = idx
                                     onConfermation = true
                                 } label: {
                                     base64toImage(stPack.stickersImage[idx].image64).resizable().frame(width: 100,height: 100).clipShape(RoundedRectangle(cornerRadius: 8))
@@ -58,10 +59,22 @@ struct stickerView: View {
             }.confirmationDialog("Prova", isPresented: $onConfermation) {
                 Button ("Remove sticker",role:.destructive) {
                     let idxSl = stickerList.firstIndex(where: {$0.id == stPack.id})!
-                    stickerList[idxSl].stickersImage[idxRemove].used = false
-                    stickerList[idxSl].stickersImage[idxRemove].image64 = ""
+                    stickerList[idxSl].stickersImage[idxSticker].used = false
+                    stickerList[idxSl].stickersImage[idxSticker].image64 = ""
+                }
+                Button("Bring on top"){
+                    let idxSl = stickerList.firstIndex(where: {$0.id == stPack.id})!
+                    if let idxFree = stickerList[idxSl].stickersImage.firstIndex(where: { !$0.used}) {
+                        stickerList[idxSl].stickersImage[idxSticker].used = false
+                        stickerList[idxSl].stickersImage[idxFree].image64 = stickerList[idxSl].stickersImage[idxSticker].image64
+                        stickerList[idxSl].stickersImage[idxFree].used = true
+                        stickerList[idxSl].stickersImage[idxSticker].image64 = ""
+                    }
+                    else{
+                        alertFull = true
+                    }
                 }
             }
-        }
+        }.alert("There isn't any free space to relocate the sticker.", isPresented: $alertFull) {}
     }
 }

@@ -25,7 +25,7 @@ struct StickerPack : Identifiable,Codable,Equatable {
         self.title = ""
         self.author = ""
         self.shared = false
-        self.trayIcon = UIImage(systemName: "x.circle")!.withTintColor(.label).pngData()!.base64EncodedString()
+        self.trayIcon = UIImage(systemName: "x.circle")!.withTintColor(.label).jpegData(compressionQuality: 0)!.base64EncodedString()
         self.stickersImage = AnyIterator {}.prefix(30).map{StickersImage()}
     }
     var id = UUID()
@@ -39,7 +39,7 @@ struct StickerPack : Identifiable,Codable,Equatable {
 struct StickersImage : Identifiable,Codable,Equatable{
     init(id:UUID,uiImage: UIImage,used : Bool){
         self.id = id
-        self.image64 = uiImage.withTintColor(.label).pngData()!.base64EncodedString()
+        self.image64 = uiImage.withTintColor(.label).jpegData(compressionQuality: 0)!.base64EncodedString()
         self.used = used
     }
     init(){
