@@ -8,15 +8,15 @@
 import SwiftUI
 
 struct Community: View {
-    
+    @State var stickerList : [StickerPack] = loadPack("stickers")
     var body: some View {
         NavigationStack{
-            Text("Community placeholder")
+            List{
+                ForEach(stickerList.filter({$0.shared})) { elem in
+                    StickerLabel(stick: $stickerList.first(where: {$0.id == elem.id})!)
+                }
+            }
         }
     }
 }
-struct Community_Previews: PreviewProvider {
-    static var previews: some View {
-        Community()
-    }
-}
+

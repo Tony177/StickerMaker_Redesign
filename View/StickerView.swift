@@ -8,12 +8,13 @@
 import SwiftUI
 import PhotosUI
 
-struct stickerView: View {
+struct StickerView: View {
     let layout = [GridItem(.flexible()),GridItem(.flexible()),GridItem(.flexible()),]
     @Environment(\.colorScheme) var colorScheme
     @State var onConfermation : Bool = false
     @State var alertFull : Bool = false
     @State var selectedItem : [PhotosPickerItem?] = [PhotosPickerItem?](repeating: nil, count: 30)
+    @State var replaceItem : PhotosPickerItem? = nil
     @State var idxSticker : Int = 0
     @Binding var stickerList : [StickerPack]
     @Binding var stPack : StickerPack
@@ -57,22 +58,27 @@ struct stickerView: View {
                     }
                 }
             }.confirmationDialog("Prova", isPresented: $onConfermation) {
-                Button ("Remove sticker",role:.destructive) {
-                    let idxSl = stickerList.firstIndex(where: {$0.id == stPack.id})!
-                    stickerList[idxSl].stickersImage[idxSticker].used = false
-                    stickerList[idxSl].stickersImage[idxSticker].image64 = ""
-                }
                 Button("Bring on top"){
                     let idxSl = stickerList.firstIndex(where: {$0.id == stPack.id})!
-                    if let idxFree = stickerList[idxSl].stickersImage.firstIndex(where: { !$0.used}) {
-                        stickerList[idxSl].stickersImage[idxSticker].used = false
-                        stickerList[idxSl].stickersImage[idxFree].image64 = stickerList[idxSl].stickersImage[idxSticker].image64
-                        stickerList[idxSl].stickersImage[idxFree].used = true
-                        stickerList[idxSl].stickersImage[idxSticker].image64 = ""
+                    if let idxFree = stickerList[idxSl].stickersImage.firstIndex(where: { !$0.used}){
+                        if (idxFree < idxSticker) {
+                            stickerList[idxSl].stickersImage[idxSticker].used = false
+                            stickerList[idxSl].stickersImage[idxFree].image64 = stickerList[idxSl].stickersImage[idxSticker].image64
+                            stickerList[idxSl].stickersImage[idxFree].used = true
+                            stickerList[idxSl].stickersImage[idxSticker].image64 = ""
+                            savePack("stickers", stickerList)
+                        }
                     }
                     else{
                         alertFull = true
                     }
+                }
+                    
+                Button ("Remove sticker",role:.destructive) {
+                    let idxSl = stickerList.firstIndex(where: {$0.id == stPack.id})!
+                    stickerList[idxSl].stickersImage[idxSticker].used = false
+                    stickerList[idxSl].stickersImage[idxSticker].image64 = ""
+                    savePack("stickers", stickerList)
                 }
             }
         }.alert("There isn't any free space to relocate the sticker.", isPresented: $alertFull) {}

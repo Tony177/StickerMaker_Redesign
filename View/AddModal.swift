@@ -8,7 +8,7 @@
 import SwiftUI
 import PhotosUI
 
-struct addModal: View {
+struct AddModal: View {
     @State private var emptyAlt : Bool = false
     @State private var newSticker: StickerPack = StickerPack()
     @State private var selectedItem: PhotosPickerItem? = nil
@@ -47,7 +47,7 @@ struct addModal: View {
                 Section{
                     Button {
                         if (newSticker.author == "" || newSticker.title == "" || selectedItem == nil){
-                                    emptyAlt = true
+                            emptyAlt = true
                         } else {
                             stickerList.append(newSticker)
                             savePack("stickers",stickerList)

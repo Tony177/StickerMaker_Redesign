@@ -17,19 +17,9 @@ struct MyStickers: View {
             List{
                 ForEach(searchResults){stick in
                     NavigationLink {
-                        stickerView(stickerList: $stickerList,stPack: $stickerList.first(where: {$0.id == stick.id})!)
+                        StickerView(stickerList: $stickerList,stPack: $stickerList.first(where: {$0.id == stick.id})!)
                     } label: {
-                        HStack{
-                            base64toImage(stick.trayIcon).resizable().frame(width: 64,height: 64).clipShape(RoundedRectangle(cornerRadius: 8))
-                            Spacer()
-                            VStack(spacing:8){
-                                Text(stick.title).fontWeight(.semibold)
-                                Text(stick.author).fontWeight(.ultraLight)
-                            }
-                            Spacer()
-                            Text(stick.shared ? "Shared" : "Private").font(.subheadline).fontWeight(.ultraLight)
-                            
-                        }
+                        StickerLabel(stick: $stickerList.first(where: {$0.id == stick.id})!)
                     }
                 }.onDelete(perform: stickerRemove)
             }.searchable(text: $searchText,placement: .navigationBarDrawer(displayMode: .always),prompt: "Search your stickers")
@@ -42,10 +32,10 @@ struct MyStickers: View {
                     }
                 }
             
-        }
-        .sheet(isPresented: $pickerMod) {
-            addModal(pickerMod: $pickerMod,stickerList: $stickerList)
-        }
+        }.toolbar(.visible, for: .navigationBar)
+            .sheet(isPresented: $pickerMod) {
+                AddModal(pickerMod: $pickerMod,stickerList: $stickerList)
+            }
     }
     var searchResults: [StickerPack] {
         if searchText.isEmpty {

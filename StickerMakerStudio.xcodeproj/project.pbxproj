@@ -7,20 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		EA532AF62924C01900932908 /* stickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA532AF52924C01900932908 /* stickerView.swift */; };
+		EA532AF62924C01900932908 /* StickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA532AF52924C01900932908 /* StickerView.swift */; };
+		EAABD941292E714200BBA98F /* StickerLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAABD940292E714200BBA98F /* StickerLabel.swift */; };
 		EAB2876B292299F0006941E0 /* StickerMakerStudioApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2876A292299F0006941E0 /* StickerMakerStudioApp.swift */; };
 		EAB2876D292299F0006941E0 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2876C292299F0006941E0 /* MainView.swift */; };
 		EAB2876F292299F0006941E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAB2876E292299F0006941E0 /* Assets.xcassets */; };
 		EAB28772292299F0006941E0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EAB28771292299F0006941E0 /* Preview Assets.xcassets */; };
 		EAB2877929229AF4006941E0 /* MyStickers.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2877829229AF4006941E0 /* MyStickers.swift */; };
 		EAB2877C29229B1F006941E0 /* Community.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB2877B29229B1F006941E0 /* Community.swift */; };
-		EAD3104C2923C7D200B70845 /* addModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD3104B2923C7D200B70845 /* addModal.swift */; };
-		EAEA7FF429236F8900DD1CAE /* stickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA7FF329236F8900DD1CAE /* stickerModel.swift */; };
+		EAD3104C2923C7D200B70845 /* AddModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD3104B2923C7D200B70845 /* AddModal.swift */; };
+		EAEA7FF429236F8900DD1CAE /* StickerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA7FF329236F8900DD1CAE /* StickerModel.swift */; };
 		EAEA7FF629236FD800DD1CAE /* dataStructure.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAEA7FF529236FD800DD1CAE /* dataStructure.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		EA532AF52924C01900932908 /* stickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stickerView.swift; sourceTree = "<group>"; };
+		EA532AF52924C01900932908 /* StickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerView.swift; sourceTree = "<group>"; };
+		EAABD940292E714200BBA98F /* StickerLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerLabel.swift; sourceTree = "<group>"; };
 		EAB28767292299F0006941E0 /* StickerMakerStudio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StickerMakerStudio.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAB2876A292299F0006941E0 /* StickerMakerStudioApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerMakerStudioApp.swift; sourceTree = "<group>"; };
 		EAB2876C292299F0006941E0 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
@@ -28,8 +30,8 @@
 		EAB28771292299F0006941E0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		EAB2877829229AF4006941E0 /* MyStickers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyStickers.swift; sourceTree = "<group>"; };
 		EAB2877B29229B1F006941E0 /* Community.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Community.swift; sourceTree = "<group>"; };
-		EAD3104B2923C7D200B70845 /* addModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addModal.swift; sourceTree = "<group>"; };
-		EAEA7FF329236F8900DD1CAE /* stickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stickerModel.swift; sourceTree = "<group>"; };
+		EAD3104B2923C7D200B70845 /* AddModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddModal.swift; sourceTree = "<group>"; };
+		EAEA7FF329236F8900DD1CAE /* StickerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StickerModel.swift; sourceTree = "<group>"; };
 		EAEA7FF529236FD800DD1CAE /* dataStructure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dataStructure.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -87,8 +89,9 @@
 				EAB2877829229AF4006941E0 /* MyStickers.swift */,
 				EAB2876C292299F0006941E0 /* MainView.swift */,
 				EAB2877B29229B1F006941E0 /* Community.swift */,
-				EAD3104B2923C7D200B70845 /* addModal.swift */,
-				EA532AF52924C01900932908 /* stickerView.swift */,
+				EAD3104B2923C7D200B70845 /* AddModal.swift */,
+				EA532AF52924C01900932908 /* StickerView.swift */,
+				EAABD940292E714200BBA98F /* StickerLabel.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -104,7 +107,7 @@
 		EAEA7FF82923714D00DD1CAE /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				EAEA7FF329236F8900DD1CAE /* stickerModel.swift */,
+				EAEA7FF329236F8900DD1CAE /* StickerModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -181,10 +184,11 @@
 			files = (
 				EAB2877929229AF4006941E0 /* MyStickers.swift in Sources */,
 				EAB2876D292299F0006941E0 /* MainView.swift in Sources */,
-				EAD3104C2923C7D200B70845 /* addModal.swift in Sources */,
+				EAABD941292E714200BBA98F /* StickerLabel.swift in Sources */,
+				EAD3104C2923C7D200B70845 /* AddModal.swift in Sources */,
 				EAB2876B292299F0006941E0 /* StickerMakerStudioApp.swift in Sources */,
-				EA532AF62924C01900932908 /* stickerView.swift in Sources */,
-				EAEA7FF429236F8900DD1CAE /* stickerModel.swift in Sources */,
+				EA532AF62924C01900932908 /* StickerView.swift in Sources */,
+				EAEA7FF429236F8900DD1CAE /* StickerModel.swift in Sources */,
 				EAB2877C29229B1F006941E0 /* Community.swift in Sources */,
 				EAEA7FF629236FD800DD1CAE /* dataStructure.swift in Sources */,
 			);
