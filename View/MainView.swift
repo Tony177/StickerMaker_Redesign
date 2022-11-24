@@ -8,18 +8,27 @@
 import SwiftUI
 
 struct MainView: View {
-    
+    @State var isActive : Bool = false
     var body: some View {
         NavigationStack{
-            TabView{
-                MyStickers()
-                    .tabItem {
-                        Label("My stickers",systemImage: "bookmark")
-                    }
-                Community()
-                    .tabItem {
-                        Label("Community",systemImage: "globe.americas.fill")
-                    }
+            if isActive {
+                TabView{
+                    MyStickers()
+                        .tabItem {
+                            Label("My stickers",systemImage: "bookmark")
+                        }
+                    Community()
+                        .tabItem {
+                            Label("Community",systemImage: "globe.americas.fill")
+                        }
+                }
+                
+            } else {
+                SplashScreen()
+            }
+        }.onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5.2    ){
+                isActive = true
             }
         }
     }
